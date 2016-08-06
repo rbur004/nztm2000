@@ -17,10 +17,10 @@ Converts coordinates  between the New Zealand Transverse Merctator 2000 and GRS8
 
 The NZTM200 provides two public methods 
 
-NZTM2000.geod( easting, northing )
+geod( easting, northing )
 Converts easting and northing (meters) to a latitude and longitude (Decimal degrees and radian results available)
 
-NZTM2000.nztm( latitude, longitude )
+nztm( latitude, longitude )
 Converts latitude and longitude (Decimal degrees) to easting and northing (meters) 
 
 ```
