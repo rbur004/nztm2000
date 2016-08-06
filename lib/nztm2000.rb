@@ -52,7 +52,7 @@ class NZTM2000
   
   #*************************************************************************
   #  Method based on Redfearn's formulation as expressed in GDA technical   
-  #  manual at http://www.anzlic.org.au/icsm/gdatm/index.html               
+  #  manual at http://www.icsm.gov.au/gda/tech.html               
   #                                                                         
   #  @param latitude [Numeric] radians                                                 
   #  @return [Numeric] the length of meridional arc in meters (Helmert formula)                 
@@ -73,7 +73,7 @@ class NZTM2000
   #***********************************************************************
   #   Calculates the foot point latitude from the meridional arc          
   #   Method based on Redfearn's formulation as expressed in GDA technical
-  #   manual at http://www.anzlic.org.au/icsm/gdatm/index.html            
+  #   manual at http://www.icsm.gov.au/gda/tech.html            
   #                                                                       
   #   @param m [Numeric] meridional arc (metres)                                          
   #                                                              
@@ -98,7 +98,7 @@ class NZTM2000
   #*************************************************************************
   #   Routine to convert from Tranverse Mercator to latitude and longitude. 
   #   Method based on Redfearn's formulation as expressed in GDA technical  
-  #   manual at http://www.anzlic.org.au/icsm/gdatm/index.html      
+  #   manual at http://www.icsm.gov.au/gda/tech.html      
   #   Sets @latitude, @longitude (degrees) and @latitude_r, @longitude_r (Radians)    
   #                                                                         
   #   @param ce [Numeric] input northing (metres)
@@ -162,7 +162,7 @@ class NZTM2000
   #                                                                         
   #   Routine to convert from latitude and longitude to Transverse Mercator.
   #   Method based on Redfearn's formulation as expressed in GDA technical  
-  #   manual at http://www.anzlic.org.au/icsm/gdatm/index.html              
+  #   manual at http://www.icsm.gov.au/gda/tech.html              
   #   Loosely based on FORTRAN source code by J.Hannah and A.Broadhurst.    
   #                                                                         
   #   Sets @easting  (metres)                                               
