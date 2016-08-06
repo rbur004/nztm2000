@@ -3,3 +3,5 @@ Manifest.txt
 README.md
 Rakefile
 lib/nztm2000.rb
+test/test_nztm2000.rb
+
