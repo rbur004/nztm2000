@@ -23,13 +23,31 @@ Converts easting and northing (meters) to a latitude and longitude (Decimal degr
 NZTM2000.nztm( latitude, longitude )
 Converts latitude and longitude (Decimal degrees) to easting and northing (meters) 
 
+```
+require 'nztm2000'
+  #Self test from nztm.c.
+  nztm2000 = NZTM2000.new
+  [[1576041.150, 6188574.240], 
+   [1576542.010, 5515331.050],
+   [1307103.220, 4826464.860]].each do |easting,northing|
+     r_latitude, r_longitude = nztm2000.geod(easting, northing)
+     r_easting, r_northing = nztm2000.nztm(r_latitude, r_longitude)
+ 
+     printf "Input  NZTM easting, northing: %12.3f %12.3f\n", easting, northing
+     printf "Output     Latitude Longitude: %12.6f %12.6f\n", r_latitude, r_longitude
+     printf "Output NZTM easting, northing: %12.3f %12.3f\n", r_easting, r_northing
+     printf "Difference:                    %12.3f %12.3f\n", easting - r_easting, northing - r_northing
+     puts
+  end
+```
+
 ## REQUIREMENTS:
 
 * 
 
 ## INSTALL:
 
-* sudo gem install NZTM2000
+* sudo gem install nztm2000
 
 ## LICENSE:
 
