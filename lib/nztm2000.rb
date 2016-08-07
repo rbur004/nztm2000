@@ -1,5 +1,5 @@
 class NZTM2000
-  VERSION = '1.0.0'
+  VERSION = '1.1.0'
 
   #Define the parameters for the International Ellipsoid
   #used for the NZGD2000 datum (and hence for NZTM)
@@ -28,8 +28,21 @@ class NZTM2000
   attr_accessor :northing    #NZTM 2000 northing (meters)
   attr_accessor :easting     #NZTM 2000 easting (meters)
   
-  def initialize
+  #Initialize
+  # Without arguments, use geod or nztm methods.
+  # Given easting: and northing:, @latitude and @longitude will be calculated
+  # Given latitude: and longitude:, @easting: and @northing will be calculated
+  # @option easting: [Numeric] nztm2000 easting
+  # @option northing: [Numeric] nztm2000 northing
+  # @option latitude: [Numeric] GRS80 latitude
+  # @option longitude: [Numeric] GRS80 longitude
+  def initialize(easting: nil, northing: nil, latitude: nil, longitude: nil)
     tm_initialize(NZTM_A, NZTM_RF, NZTM_CM/(180/Math::PI), NZTM_SF, NZTM_OLAT/(180/Math::PI), NZTM_FE, NZTM_FN, 1.0)
+    if easting != nil && northing != nil
+      geod(easting, northing)
+    elsif( latitude != nil && longitude != nil)
+      nztm(latitude, longitude)
+    end
   end
   
   #Initialize the TM projection parameters
@@ -219,21 +232,27 @@ class NZTM2000
 
   # Functions implementation the TM projection specifically for the
   #   NZTM coordinate system
+  # @param easting: [Numeric] nztm2000 easting, either named, or the first argument
+  # @param northing: [Numeric] nztm2000 northing, either named, or the second argument
   #  @return [Numeric,Numeric] latitude and longitude (decimal degrees)
-  def geod( easting, northing )
-    @easting = easting
-    @northing = northing
+  def geod( f_easting = nil, f_northing = nil, easting: nil, northing: nil )
+    @easting = easting || f_easting
+    @northing = northing || f_northing
+    raise ArgumentError.new("Not Numeric") if ! (@easting.is_a?(Numeric) && @northing.is_a?(Numeric) )
     return tm_geod
   end
 
   # Functions implementation the TM projection specifically for the
   #   NZTM coordinate system
+  # @param latitude: [Numeric] GRS80 latitude, either named, or the first argument
+  # @param longitude: [Numeric] GRS80 longitude, either named, or the second argument
   #  @return [Numeric,Numeric] northing and easting (meters)
-  def nztm( latitude, longitude )
-    @latitude = latitude
-    @latitude_r = latitude/(180/Math::PI)
-    @longitude = longitude
-    @longitude_r = longitude/(180/Math::PI)
+  def nztm( f_latitude = nil, f_longitude = nil, latitude: nil, longitude: nil )
+    @latitude = latitude || f_latitude
+    @longitude = longitude || f_longitude
+    raise ArgumentError.new("Not Numeric") if ! (@latitude.is_a?(Numeric) && @longitude.is_a?(Numeric) )
+    @latitude_r = @latitude/(180/Math::PI)
+    @longitude_r = @longitude/(180/Math::PI)
     return geod_tm
   end
 
