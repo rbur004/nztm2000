@@ -1,6 +1,6 @@
 # nztm2000
 
-* http://rbur004.github.com/nztm2000/
+* http://rbur004.github.io/nztm2000/
 * Source https://github.com/rbur004/nztm2000
 * Gem https://rubygems.org/gems/nztm2000
 
